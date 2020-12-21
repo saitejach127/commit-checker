@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v2
+      - name: npm install
+        run: |
+          npm install
       - name: run file
         run: |
           node index.js
