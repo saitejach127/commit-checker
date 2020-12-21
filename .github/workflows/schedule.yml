@@ -8,5 +8,8 @@ jobs:
   runreward:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Hello world"
+      - name: check out
+        uses: actions/checkout@v2
+      - name: run file
+        run: |
+          node index.js
