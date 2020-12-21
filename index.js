@@ -3,7 +3,7 @@ const axios = require("axios").default;
 var score = {}
 
 async function getCommits() {
-  var repos = await (await axios.get("http://localhost:3000/repos")).data.repos;
+  var repos = await (await axios.get("https://leaderboardserver.herokuapp.com/repos")).data.repos;
   console.log(repos);
   for (let i = 0; i < repos.length; i++) {
     var commits = (
@@ -25,7 +25,7 @@ async function getCommits() {
         issueNumber = issueNumber.trim();
         issueNumber = issueNumber.substring(1, issueNumber.length);
         issueNumber = parseInt(issueNumber);
-        var points = await axios.post("http://localhost:3000/getissue", {"repoName":repos[i], "issueNumber" : issueNumber});
+        var points = await axios.post("https://leaderboardserver.herokuapp.com/getissue", {"repoName":repos[i], "issueNumber" : issueNumber});
         points = points.data.points;
         points = parseInt(points);
         if (!isNaN(issueNumber)) {
@@ -44,7 +44,7 @@ async function getCommits() {
     };
   }
   console.log(JSON.stringify(score,null,2));
-  var serverResponse = await axios.post("http://localhost:3000/setdb", {"data":JSON.stringify(score)});
+  var serverResponse = await axios.post("https://leaderboardserver.herokuapp.com/setdb", {"data":JSON.stringify(score)});
   console.log(serverResponse.data);
 }
 
