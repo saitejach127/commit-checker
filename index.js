@@ -28,7 +28,7 @@ async function getCommits() {
         var points = await axios.post("https://leaderboardserver.herokuapp.com/getissue", {"repoName":repos[i], "issueNumber" : issueNumber});
         points = points.data.points;
         points = parseInt(points);
-        if (!isNaN(issueNumber)) {
+        if (!isNaN(issueNumber) && name!="SomalRudra") {
           if(score[name]){
             if(score[name][repos[i]]){
               score[name][repos[i]] += points;
