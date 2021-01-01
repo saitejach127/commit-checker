@@ -6,6 +6,7 @@ async function getCommits() {
   var repos = await (await axios.get("https://leaderboardserver.herokuapp.com/repos")).data.repos;
   console.log(repos);
   for (let i = 0; i < repos.length; i++) {
+    let prcount = 0;
     var commits = (
       await axios.get(`https://api.github.com/repos/${repos[i]}/commits`)
     ).data;
@@ -39,9 +40,11 @@ async function getCommits() {
             score[name] = {};
             score[name][repos[i]] = points;
           }
+          prcount++;
         }
       }
     };
+    var resp = await axios.post("https://leaderboardserver.herokuapp.com/prcount", {"repoName" : repos[i], "count" : prcount});
   }
   console.log(JSON.stringify(score,null,2));
   var serverResponse = await axios.post("https://leaderboardserver.herokuapp.com/setdb", {"data":JSON.stringify(score)});
