@@ -58,8 +58,8 @@ async function getCommits() {
     var resp = await axios.post("https://leaderboardserver.herokuapp.com/prcount", {"repoName" : repos[i], "count" : prcount});
   }
   console.log(JSON.stringify(score,null,2));
-  // var serverResponse = await axios.post("https://leaderboardserver.herokuapp.com/setdb", {"data":JSON.stringify(score)});
-  // console.log(serverResponse.data);
+  var serverResponse = await axios.post("https://leaderboardserver.herokuapp.com/setdb", {"data":JSON.stringify(score)});
+  console.log(serverResponse.data);
 }
 
 getCommits();
